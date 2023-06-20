@@ -1,0 +1,5 @@
+#!/bin/bash
+
+read -p "Enter your Email" 
+read -p "Enter your age"
+read -p "Enter student id"
