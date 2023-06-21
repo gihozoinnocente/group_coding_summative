@@ -1,5 +1,33 @@
 #!/bin/bash
+# A user is prompted to enter their email, age and id. The recorded input are saved in students_file
 
-read -p "Enter your Email" 
-read -p "Enter your age"
-read -p "Enter student id"
+students_file="students-list_0333.txt"
+
+read -p "Enter your Email: " student_email
+read -p "Enter your age: " student_age
+read -p "Enter student id: " student_id
+
+echo -e "Welcome to Bachelor of software engineering list of record \n Your email $student_email \n Your age is $student_age \n Your student id is $student_id " >> $students_file
+
+#read -p "Enter the student id you want to delete:" entered_id
+
+cat $students_file
+
+#if [$entered_id == $student_id];
+#then
+# echo "Deleting student record with id $entered_id" 
+#sed -i "/$student_id/d" $students_file
+#else
+#echo "Student record with id $entered_id not found"
+#fi
+
+echo "Enter student ID to delete: "
+read id
+
+if grep -q "^.*, $id$" "$students_file"; then
+    grep -v "^.*, $id$" "$students_file" > temp.txt
+    mv temp.txt "$students_file"
+    echo "Student record deleted successfully."
+else
+    echo "Student ID not found in the records."
+fi
